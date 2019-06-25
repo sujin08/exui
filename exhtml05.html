@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="excss04.html">
+        <fieldset>
+            아이디 : <input type="text" name="id" value="abc"><br>
+            비밀번호 : <input type="password" name="pass"><br>
+        </fieldset>
+        성별 : <input type="radio" name="gender" value="1" checked id="rad1"/>
+               <label for="rad1">여</label>
+        <!--여와 엘리먼트 사이의 연관성을 레이블로 주었음-->
+               <input type="radio" name="gender" value="2" id="rad2"/>
+               <label for="rad2">남</label>
+        <br>
+        게임 : <input type="checkbox" name="gender" value="1"/> overwath
+               <input type="checkbox" name="gender" value="2" checked/> League of legends
+               <input type="checkbox" name="gender" value="2"/> maple story
+        <br>
+        소설 : <select name="novel">
+                   <option value="fault" >과실</option>
+                   <option value="oasis" selected >그린 오아시스</option>
+                   <option value="dealer">극한직업 던전상인</option>
+        </select>
+        <br>
+        <textarea name="memo" cols="30" rows="10">내용을 입력해 주세요.</textarea><br>
+        <!--<input type="file" name="aa">-->
+        <input type="hidden" name="x" value="123" />
+        <input type="submit" />
+        <input type="reset" />
+    </form>
+
+</body>
+</html>
