@@ -21,8 +21,14 @@
         무신사 검색 : <input type="text" name="q"/> <input type="submit" value="검색"/>
     </form><br>
 
-    <form action="https://search.daum.net/search" target="_blank">
-        다음 검색 : <input type="text" name="q"/> <input type="submit" value="검색"/>
+    <form action="https://search.daum.net/search" target="goo">
+        다음 검색 : <input type="text" name="q"/> 
+        <select name="w">
+                <option value="blog">블로그</option>
+                <option value="news">뉴스</option>
+                <option value="cafe">카페</option>
+            </select>
+            <input type="submit" value="검색"/>
     </form><br>
     <iframe src="https://store.musinsa.com/" name="goo" width="2000" height="1000"></iframe>
 
