@@ -37,12 +37,12 @@
         var pri = document.querySelector("#price");
         var btn = document.querySelector("#save");
 
-        for (var i =0; i < prodList.length ;i++){
-         pro.innerHTML += '<tr>'+'<td>'+prodList[i].no+'</td>' +'<td>'+prodList[i].name+'</td>' +'<td>'+prodList[i].price+'</td>'+'</tr>'; 
-        }
-        btn.oncilck=function(){
-           //var p = prodList.push( { no: pn.value, name: Pna.value, price: pri.value } );
-            pro.innerHTML += '<tr>'+'<td>'+pn.value+'</td>' +'<td>'+Pna.value+'</td>' +'<td>'+pri.value+'</td>'+'</tr>';
+        btn.onclick=function(){
+            //var p = prodList.push( { no: pn.value, name: Pna.value, price: pri.value } );
+            pro.innerHTML += prodList.push( { no: pn.value, name: Pna.value, price: pri.value } );
+            for (var i =0; i < prodList.length ;i++){
+             pro.innerHTML += '<tr>'+'<td>'+prodList[i].no+'</td>' +'<td>'+prodList[i].name+'</td>' +'<td>'+prodList[i].price+'</td>'+'</tr>'; 
+            }
         };
         
         //2. 저장 버튼을 클릭하면, 입력한 상품 정보를 prodList 에 추가하고,
