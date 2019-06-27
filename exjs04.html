@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Object</title>
+    <script>
+        //객체(인스턴스) 생성
+        var obj1 = { };  
+        var obj2 = new Object();
+        
+        // { 속성명 : 속성값, 속성명 : 속성값, 속성명 : 속성값 ... }
+        //  형태로 속성을 가진 객체를 생성 가능 (속성명은 따옴표를 사용하는 것도 가능)
+        var obj3 = { name : "너부리" , score : 65 };
+        // var obj3 = { "name" : "너부리" , "score" : 65 };
+        // var obj3 = { 'name' : "너부리" , 'score' : 65 };
+
+        // 객체에 속성 추가 : 속성명을 지정하고 값을 저장하면, 해당 속성이 없는 경우 자동 생성
+        var obj4 = { };
+        
+        // 객체의 속성값 출력
+        
+        // 객체의 속성 참조시 객체.속성명 뿐만 아니라, 배열처럼 객체["속성명"] 표현도 사용 가능
+
+        //존재하지 않는 속성의 값을 읽을 경우, undefined
+        
+
+
+        var car = { speed:0 };
+        car.brake=function(){
+            this.speed=this.speed-10;
+        };
+
+        console.log( car.speed );
+        // car.accel(); //속도가 10 증가
+        console.log( car.speed );
+        car.brake(); //속도가 10 감소
+        console.log( car.speed );
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

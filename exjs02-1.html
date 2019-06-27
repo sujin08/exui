@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JS BRANCH and LOOP</title>
 </head>
+<style>
+    td{      
+        border: 1px solid black;
+    }
+    table{
+        border-spacing: 0px;
+        border-collapse: collapse;
+    }
+</style>
 <body>
     <h1>1</h1>
     <input type="text" id="score" /><button id="btn1">평가</button>결과 : <span id="result"></span>
@@ -146,6 +155,28 @@
         //  구구단 테이블 모양은 아래 이미지를 참고하여 2가지 형태로 출력
         // https://i2.wp.com/www.happyfam.or.kr/ysoh/wp-content/uploads/sites/3/1/cfile10.uf.133865234C84222C43F18D.gif?resize=500%2C342
         // https://4.bp.blogspot.com/-sMnQzltEQNY/WCqNbKngF2I/AAAAAAAACd8/JuOc1vTm2C8NRnFfmNR3TxqSzXXucXlEACLcB/s1600/K-004.png
+        
+
+
+        var danin = document.querySelector("#dan");
+        var outin = document.querySelector("#out");
+        var btn = document.querySelector("#outBtn");
+
+        btn.onclick=function(){
+          var sum=" ";
+          var dan=Number(danin.value);
+          sum=sum+'<table>'+'<tbody>';
+          for(var i=2;i<=dan;i++){
+            sum=sum+'<tr>';
+              for(var j=1;j<10;j++){
+               sum=sum+'<td>'+i+"*"+j+"="+i*j+'</td>';
+                }
+            sum=sum+'</tr>';
+            }
+            sum=sum+'<tbody>'+'</table>';
+            outin.innerHTML=sum
+        };
+
 
     </script>
 </body>
