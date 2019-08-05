@@ -43,7 +43,7 @@
             alert('링크 클릭!');
             // 해당 이벤트에 대한 브라우저의 기본 동작 취소
             //   ev.preventDefault();
-            //   return false; //== ev.preventDefault() + ev.stopPropagation()
+            //   return false; //== ev.preventDefault() + ev.stopPropagation() 부모로 전달 ㄴㄴ
          });
          $('#linkdiv').on('click', function (ev) {
             alert('링크 DIV 클릭!');
@@ -58,6 +58,8 @@
 
          // 1. '버튼 추가' 버튼을 클릭할 때마다, id가 btndiv인 엘리먼트 내부에 
          //    '추가 버튼'이라는 내용을 가진 button 엘리먼트를 하나씩 추가
+
+         
          // 2. id가 btndiv인 엘리먼트 내부에 있는 button 엘리먼트를 클릭하면, 
          //    '추가 버튼 클릭!'이라는 메시지를 출력
          
