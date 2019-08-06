@@ -20,7 +20,7 @@
             margin: 10px;
         }
     </style>
-    <script src="jquery-3.2.1.js"></script>
+    <script src="jquery-3.4.1.js"></script>
     <script>
         $(function() {
             console.log( $('#smallbox').css('width') , $('#smallbox').css('height') );
@@ -63,17 +63,23 @@
                 var y = ev.pageY - $(this).offset().top;
                 console.log(x, y);
             });
-
+            var oldval;
             // 마우스 커서를 버튼 위로 이동하면 버튼의 글자를 "누르세요"라고 변경
-            // 마우스 커서를 버튼 밖으로 이동하면 버튼의 글자를 원래대로 변경
-            // $('button').on('mouseenter', function() {
-            $('button').mouseenter(function() {
+            $('button').mouseenter(function(ev) {
+                oldval=$(this).html();
+                $(this).html('추가버튼');
+
                 // .data('key', value) : 엘리먼트에 부가적인 데이터를 key-value 쌍으로 저장
 
             });
+            // 마우스 커서를 버튼 밖으로 이동하면 버튼의 글자를 원래대로 변경
+            // $('button').on('mouseenter', function() {
+                // .data('key', value) : 엘리먼트에 부가적인 데이터를 key-value 쌍으로 저장
+
+
             // $('button').on('mouseleave', function() {
             $('button').mouseleave(function() {
-
+                $(this).html(oldval);
             });
 
             // $().hover(mouseenter이벤트발생시실행할함수,mouseleave이벤트발생시실행할함수);
