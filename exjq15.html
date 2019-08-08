@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JQ MULTI-LEVEL SELECT</title>
-    <script src="jquery-3.2.1.js"></script>
+    <script src="jquery-3.4.1.js"></script>
     <script>
+         $(function () {
         var codeList = [
          { code: '100', title: '식사', pcode: null }
             ,{ code: '110', title: '한식', pcode: '100'}
@@ -27,6 +28,37 @@
                 ,{ code: '222', title: '키위쥬스', pcode: '220'}
                 ,{ code: '223', title: '오렌지쥬스', pcode: '220'}
         ];
+        $('[name="middle"]').on('change', function(){
+            var code = $(this).val();
+            $('[name="small"]').empty();
+            for (var i = 0; i < code.length; i++) {
+                $('<option>').val(c.code).html(c.title).append('[name="small"]');
+            }
+        });
+        $('[name="middle"]').on('change', function(){
+            var code = $(this).val();
+            $('[name="small"]').empty();
+            for (var i = 0; i < code.length; i++) {
+                $('<option>').val(c.code).html(c.title).append('[name="small"]');
+            }
+        });
+        $('[name="middle"]').on('change', function(){
+            var code = $(this).val();
+            $('[name="small"]').empty();
+            for (var i = 0; i < code.length; i++) {
+                $('<option>').val(c.code).html(c.title).append('[name="small"]');
+            }
+        });
+        function makeoption(a , b){
+            $('[name="'+a+'"]').on('change', function(){
+            var code = $(this).val();
+            $('[name="'+a+'"]').empty();
+            for (var i = 0; i < code.length; i++) {
+                $('<option>').val(c.code).html(c.title).append('[name="'+a+'"]');
+            }
+        });
+        }
+         });
     </script>
 </head>
 <body>

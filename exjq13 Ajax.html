@@ -37,9 +37,36 @@
         // 상품객체들을 저장하는 배열 생성
         var prodList = [];
         // 상품객체 { no : 상품번호, name : 상품명, price : 가격 } 
-        prodList.push( { no: 'P001', name: "인디안밥", price: 500 } );
-        prodList.push( { no: 'P002', name: "고래밥", price: 200 } );
-        prodList.push( { no: 'P003', name: "사또밥", price: 800 } );
+        
+        $.ajax({
+            url : './product.json',
+            method : 'GET',
+            dataType : 'text',
+            success: function(data, Starus, jqXHR){
+                console.log('요청ok : ',status);
+                data = JSON.parse(data);
+                prodList = data.products;
+                refreshProdList()
+            },
+            error: function(jqXHR,Starus,error){
+                console.log('요청no : ',status);
+            },
+
+            Complete: function(jqXHR,Starus){
+                console.log('요청 end');
+            }
+        })
+
+        .done(function(data, Starus, jqXHR){
+                console.log('요청ok : ',status);
+                data = JSON.parse(data);
+                prodList = data.products;
+                refreshProdList();
+            })
+        .fale(function(jqXHR,Starus,error){
+                console.log('요청no : ',status);
+            })
+        .
         //1. 현재 prodList 에 저장되어 있는 상품들의 정보를 상품목록 테이블의 tbody에 출력
         function refreshProdList() {
             $('#prods').empty(); // === .html('');

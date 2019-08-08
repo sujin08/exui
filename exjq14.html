@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,40 +11,137 @@
             border-spacing: 0px;
             border-collapse: collapse;
         }
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid black;
         }
     </style>
-    <script src="jquery-3.2.1.js"></script>
+    <script src="jquery-3.4.1.js"></script>
     <script>
-        var studentList = [ 
-            {  stuNo: 1, stuName: '마이콜', stuScore: 56  },
-            {  stuNo: 2, stuName: '고길동', stuScore: 44  },
-            {  stuNo: 3, stuName: '희동이', stuScore: 77  }
-         ];
-        //1. 학생목록 조회 버튼을 클릭하면, studentList의 학생 정보를 stuTable 테이블의 tbody에 출력
-        //2. 저장 버튼을 클릭하면, input에 입력된 내용으로 객체를 생성하여 studentList에 추가
-        //3. 학생 테이블에서 삭제 버튼을 클릭하면, 
-        //      해당 학생 정보를 studentList와 테이블에서 제거
-        //4. 수정.....
+        $(function () {
+            var studentList = [
+                { stuNo: '1', stuName: '마이콜', stuScore: 56 },
+                { stuNo: '2', stuName: '고길동', stuScore: 44 },
+                { stuNo: '3', stuName: '희동이', stuScore: 77 }
+            ];
+            function refreshstudentList() {
+                $('#stuTable').empty(); // === .html('');
+                for (var i = 0; i < studentList.length; i++) {
+                    var s = studentList[i];
+                    var $tr = $('<tr>');
+                    $('<td>').html(s.stuNo).appendTo($tr);
+                    $('<td>').html(s.stuName).appendTo($tr);
+                    $('<td>').html(s.stuScore).appendTo($tr);
+                    var $eb = $('<button>').html('수정').addClass('editBtn').attr('data-no', s.stuNo);
+                    $('<td>').html($eb).appendTo($tr);
+                    var $db = $('<button>').html('삭제').addClass('delBtn').attr('data-no', s.stuNo);
+                    $('<td>').html($db).appendTo($tr);
+                    $tr.appendTo('#stuTable');
+                }
+            }
+            refreshstudentList();
+           
+            //1. 학생목록 조회 버튼을 클릭하면, studentList의 학생 정보를 stuTable 테이블의 tbody에 출력
+
+            //2. 저장 버튼을 클릭하면, input에 입력된 내용으로 객체를 생성하여 studentList에 추가
+            //3. 학생 테이블에서 삭제 버튼을 클릭하면, 
+            //      해당 학생 정보를 studentList와 테이블에서 제거
+            //4. 수정.....
+            $('#saveBtn').on('click', function () {
+                var stuNoVal = $('#stuNo').val();
+                var stuNameVal = $('#stuName').val();
+                var stuScoreVal = $('#stuScore').val();
+                if ($('#stuNo').prop('disabled')) { //수정
+                    for (var i = 0; i < studentList.length; i++) {
+                        var s = studentList[i];
+                        if (stuNoVal == s.stuNo) {
+                            s.stuName = stuNameVal;
+                            s.stuScore = stuScoreVal;
+                            break;
+                        }
+                    }
+                } else { //추가
+                    studentList.push({ stuNo: stuNoVal, stuName: stuNameVal, stuScore: stuScoreVal });
+                }
+                refreshstudentList();
+                $('#stuNo').val('').prop('disabled', false);
+                $('#stuName').val('');
+                $('#stuScore').val('');
+            });
+
+            $('#stuTable').on('click', '.delBtn', function () {
+                var no = $(this).attr('data-no');
+                for (var i = 0; i < studentList.length; i++) {
+                    var s = studentList[i];
+                    if (no == s.stuNo) {
+                        studentList.splice(i, 1); //i번 요소부터 1개를 삭제
+                        break;
+                    }
+                }
+                refreshProdList();
+            });
+            $('#stuTable').on('click', '.editBtn', function () {
+                var no = $(this).attr('data-no');
+                for (var i = 0; i < studentList.length; i++) {
+                    var s = studentList[i];
+                    if (no == s.stuNo) {
+                        $('#stuNo').val(s.stuNo).prop('disabled', true);
+                        $('#stuName').val(s.stuName);
+                        $('#stuScore').val(s.stuScore);
+                        break;
+                    }
+                }
+                refreshProdList();
+            });
+        });
     </script>
 </head>
+
 <body>
     <form action="" id="stuForm">
-        번호 : <input type="text" name="stuNo" /> <br />
-        이름 : <input type="text" name="stuName" /> <br />
-        성적 : <input type="text" name="stuScore" /> <br />
+        번호 : <input type="text" id="stuNo" /> <br />
+        이름 : <input type="text" id="stuName" /> <br />
+        성적 : <input type="text" id="stuScore" /> <br />
         <input type="button" value="저장" id="saveBtn" />
     </form>
     <hr />
     <button type="button" id="listBtn">학생목록 조회</button>
-    <table id="stuTable">
-        <thead><tr><th>번호</th><th>이름</th><th>성적</th><th>수정</th><th>삭제</th></tr></thead>
-        <tbody>
-            <tr><td>1</td><td>마이콜</td><td>56</td><td><button>수정</button></td><td><button>삭제</button></td></tr>
-            <tr><td>2</td><td>고길동</td><td>44</td><td><button>수정</button></td><td><button>삭제</button></td></tr>
-            <tr><td>3</td><td>희동이</td><td>77</td><td><button>수정</button></td><td><button>삭제</button></td></tr>
+    <table>
+        <thead>
+            <tr>
+                <th>번호</th>
+                <th>이름</th>
+                <th>성적</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+        </thead>
+        <tbody id="stuTable">
+            <!-- <tr>
+                <td>1</td>
+                <td>마이콜</td>
+                <td>56</td>
+                <td><button>수정</button></td>
+                <td><button>삭제</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>고길동</td>
+                <td>44</td>
+                <td><button>수정</button></td>
+                <td><button>삭제</button></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>희동이</td>
+                <td>77</td>
+                <td><button>수정</button></td>
+                <td><button>삭제</button></td>
+            </tr> -->
         </tbody>
     </table>
 </body>
+
 </html>

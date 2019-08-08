@@ -1,23 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TYPE</title>
     <style>
+        #screen {
+            border: 1px solid black;
+            height: 500px;
+            width: 500px;
+            position: relative;
+        }
+
+        #screen .tag {
+            border: 1px solid rgb(252, 150, 150);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
     </style>
-    <script src="jquery-3.2.1.js"></script>
+    <script src="jquery-3.4.1.js"></script>
     <script>
-        var availableTags = [ "ActionScript","AppleScript","Asp","BASIC",
-      "C","C++","Clojure","COBOL","ColdFusion","Erlang","Fortran","Groovy",
-      "Haskell","Java","JavaScript","Lisp","Perl","PHP","Python","Ruby","Scala","Scheme" ];
+        $(function () {
+
+            var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC",
+                "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy",
+                "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
+
+            var screenHeight = $('#screen').height();
+            var screenWidth = $('#screen').width();
+
+            var timerId = window.setInterval(function () {
+                var randomIdx = parseInt(Math.random() * availableTags.length);
+                var tag = availableTags[randomIdx];
+                var $sp = $('<span>').html(tag).appendTo('#screen').addClass('tag');
+                    
+                var spWidth = $sp.width();
+                var spHeight = $sp.height();
+                $sp.attr('data-word',tag)
+                .css('left', Math.random() * (screenWidth - spWidth))
+                    .animate({ top: screenHeight - spHeight }, 10000, function () {
+                        window.clearInterval(timerId)
+                        $('#screen span.tag').stop(true);
+                        alert('GAME OVER');
+                    });
+            }, 2000);
+
+            $('#word').on('keyup', function (ev) {
+                console.log(ev.which);
+                if (ev.width === 13) {
+                    var v = $(this).val();
+                    $('#screen span[data-word="' + v + '"]').remove().stop(true);
+                    $(this).val(" ");
+                }
+            });
+
+        });
     </script>
 </head>
+
 <body>
     <h1>대충 타자 연습</h1>
     <div id="screen"></div>
     <hr />
     <input type="text" id="word" />
 </body>
+
 </html>
